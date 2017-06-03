@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:id="@+id/splash"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+    >
+
+    <ImageView
+        android:id="@+id/iv_welcome"
+        android:layout_width="185dp"
+        android:layout_height="145dp"
+        android:src="@drawable/splash"
+        android:layout_centerInParent="true"
+        />
+    <TextView
+        android:id="@+id/rookie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RookieLjr"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#E57E9D"
+        android:textSize="15dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="https://github.com/ljrRookie"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#E57E9D"
+        android:textSize="10dp"/>
+</RelativeLayout>
