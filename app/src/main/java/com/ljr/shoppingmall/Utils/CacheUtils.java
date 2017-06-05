@@ -23,7 +23,7 @@ public class CacheUtils {
      * @return
      */
     public static boolean getBoolean(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences("atguigu", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("RookieLjr", Context.MODE_PRIVATE);
         return sp.getBoolean(key, false);
     }
 
@@ -35,8 +35,29 @@ public class CacheUtils {
      * @param value
      */
     public static void putBoolean(Context context, String key, boolean value) {
-        SharedPreferences sp = context.getSharedPreferences("atguigu", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("RookieLjr", Context.MODE_PRIVATE);
         sp.edit().putBoolean(key, value).commit();
     }
+    /**
+     * 得到保持的String类型的数据
+     * @param context
+     * @param key
+     * @return
+     */
+    public static String getString(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences("RookieLjr",Context.MODE_PRIVATE);
+        return sp.getString(key,"");
+    }
 
+
+    /**
+     * 保持String类型数据
+     * @param context 上下文
+     * @param key
+     * @param value 保持的值
+     */
+    public static void saveString(Context context, String key,String value) {
+        SharedPreferences sp = context.getSharedPreferences("RookieLjr",Context.MODE_PRIVATE);
+        sp.edit().putString(key,value).commit();
+    }
 }
