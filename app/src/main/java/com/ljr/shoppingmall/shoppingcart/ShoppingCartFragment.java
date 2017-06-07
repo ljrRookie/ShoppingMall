@@ -33,7 +33,13 @@ import butterknife.OnClick;
 
 public class ShoppingCartFragment extends BaseFragment {
     private static final String TAG = ShoppingCartFragment.class.getSimpleName();
+    /**
+     * 编辑状态
+     */
     private static final int ACTION_EDIT = 1;
+    /**
+     * 完成状态
+     */
     private static final int ACTION_COMPLETE = 2;
     @Bind(R.id.tv_shopcart_edit)
     TextView mTvShopcartEdit;
@@ -76,8 +82,19 @@ public class ShoppingCartFragment extends BaseFragment {
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_shopping_cart, null);
 
-
         return view;
+    }
+
+    @Override
+    public void initData() {
+
+        mTvEmptyCartTobuy.setClickable(true);
+        Log.e(TAG, "initData:主页数据被初始化了 ");
+        initListener();
+        mTvShopcartEdit.setTag(ACTION_EDIT);
+        mTvShopcartEdit.setText("编辑");
+        mLlCheckAll.setVisibility(View.VISIBLE);
+        showData();
     }
 
     private void initListener() {
@@ -103,14 +120,12 @@ public class ShoppingCartFragment extends BaseFragment {
         mTvShopcartEdit.setTag(ACTION_EDIT);
         mTvShopcartEdit.setText("编辑");
         if (mAdapter!=null) {
-            mAdapter.checkAll_none(false);
-            mAdapter.checkAll();
-            mAdapter.showTotalPrice();
+            mAdapter.checkAll_none(true);
         }
-        //3.显示删除视图
-        mLlDelete.setVisibility(View.VISIBLE);
-        //4.隐藏结算视图
-        mLlCheckAll.setVisibility(View.GONE);
+        //3.隐藏删除视图
+        mLlDelete.setVisibility(View.GONE);
+        //4.显示结算视图
+        mLlCheckAll.setVisibility(View.VISIBLE);
     }
 
     private void showDelete() {
@@ -120,21 +135,26 @@ public class ShoppingCartFragment extends BaseFragment {
         //2.变成非勾选
         if (mAdapter!=null) {
             mAdapter.checkAll_none(false);
-            mAdapter.checkAll();
+            mCbAll.setChecked(false);
+            mCheckboxAll.setChecked(false);
         }
         //3.显示删除视图
         mLlDelete.setVisibility(View.VISIBLE);
         //4.隐藏结算视图
         mLlCheckAll.setVisibility(View.GONE);
+        mAdapter.showTotalPrice();
     }
+    private void checkData() {
+        if (mAdapter != null && mAdapter.getItemCount() > 0) {
+            mTvShopcartEdit.setVisibility(View.VISIBLE);
+            mLlEmptyShopcart.setVisibility(View.GONE);
 
-    @Override
-    public void initData() {
-        Log.e(TAG, "initData:主页数据被初始化了 ");
-        initListener();
+        } else {
+            mLlEmptyShopcart.setVisibility(View.VISIBLE);
+            mTvShopcartEdit.setVisibility(View.GONE);
 
+        }
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -145,7 +165,7 @@ public class ShoppingCartFragment extends BaseFragment {
         List<GoodsBean> goodsBeanList = CartStorage.getInstance().getAllData();
         if (goodsBeanList != null && goodsBeanList.size() > 0) {
             mTvShopcartEdit.setVisibility(View.VISIBLE);
-            mLlCheckAll.setVisibility(View.VISIBLE);
+            /*mLlCheckAll.setVisibility(View.VISIBLE);*/
             mLlEmptyShopcart.setVisibility(View.GONE);
             mAdapter = new ShoppingCartAdapter(mContext, goodsBeanList, mTvShopcartTotal, mCheckboxAll, mCbAll);
             mRecyclerview.setAdapter(mAdapter);
@@ -171,6 +191,10 @@ public class ShoppingCartFragment extends BaseFragment {
                 break;
             case R.id.btn_delete:
                 mAdapter.deleteData();
+                mAdapter.showTotalPrice();
+                checkData();
+                mAdapter.checkAll();
+
                 break;
             case R.id.btn_collection:
                 Toast.makeText(mContext, "收藏！！！", Toast.LENGTH_SHORT).show();

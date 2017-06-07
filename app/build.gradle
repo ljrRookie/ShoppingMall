@@ -35,6 +35,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
     compile 'com.linsea:opendanmaku:1.0.0@aar'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.2@aar'

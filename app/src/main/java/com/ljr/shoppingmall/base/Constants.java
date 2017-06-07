@@ -6,7 +6,7 @@ package com.ljr.shoppingmall.base;
  */
 
 public class Constants {
-    public static String BASE_URL = "http://192.168.24.95:8080/ShoppingMall";
+    public static String BASE_URL = "http://192.168.24.77:8080/ShoppingMall";
 
     /**
      * 主页Fragment路径
