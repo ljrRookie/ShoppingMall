@@ -1,5 +1,6 @@
 package com.ljr.shoppingmall.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.ljr.shoppingmall.base.BaseFragment;
 import com.ljr.shoppingmall.base.Constants;
 import com.ljr.shoppingmall.home.adapter.HomeFragmentAdapter;
 import com.ljr.shoppingmall.home.bean.ResultBeanData;
+import com.ljr.shoppingmall.user.activity.MessageCenterActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -104,11 +106,15 @@ public class HomeFragment extends BaseFragment {
 
 
 
-    @OnClick({R.id.search_home, R.id.ib_top})
+    @OnClick({R.id.search_home, R.id.ib_top,R.id.tv_message_home})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.search_home:
                 Toast.makeText(mContext, "搜索吧！！！！", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tv_message_home:
+                Intent intent = new Intent(mContext, MessageCenterActivity.class);
+                mContext.startActivity(intent);
                 break;
             case R.id.ib_top:
                 mHomeRecyclerview.scrollToPosition(0);

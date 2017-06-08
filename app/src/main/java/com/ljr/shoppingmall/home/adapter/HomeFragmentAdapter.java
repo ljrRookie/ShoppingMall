@@ -19,10 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.ljr.shoppingmall.GoodsInfoActivity;
 import com.ljr.shoppingmall.R;
 import com.ljr.shoppingmall.base.Constants;
+import com.ljr.shoppingmall.home.activity.GoodsListActivity;
 import com.ljr.shoppingmall.home.bean.GoodsBean;
 import com.ljr.shoppingmall.home.bean.ResultBeanData;
 import com.youth.banner.Banner;
@@ -222,17 +222,22 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             super(inflate);
             this.mContext = context;
             mChannel = (GridView) inflate.findViewById(R.id.gv_channel);
-            mChannel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
-                }
-            });
+
         }
 
         public void setData(List<ResultBeanData.ResultBean.ChannelInfoBean> channel_info) {
             ChannelAdapter channelAdapter = new ChannelAdapter(mContext, channel_info);
             mChannel.setAdapter(channelAdapter);
+            mChannel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if(position <= 8){
+                        Intent intent = new Intent(mContext, GoodsListActivity.class);
+                        intent.putExtra("position",position);
+                        mContext.startActivity(intent);
+                    }
+                }
+            });
         }
     }
 
