@@ -7,7 +7,7 @@ package com.ljr.shoppingmall.base;
 
 public class Constants {
     public static Boolean isBackHome = false;
-    public static String BASE_URL = "http://192.168.25.42:8080/ShoppingMall";
+    public static String BASE_URL = "http://117.48.205.126/ShoppingMall";
 
     /**
      * 主页Fragment路径
